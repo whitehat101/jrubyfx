@@ -32,12 +32,16 @@ module JRubyFX::Utils::Inspector
     props = ["#{self.class}:#{'0x%08x' % object_id}"]
     props += (self.class.instance_variable_get('@inspect_properties')||discover_properties).
       map do |key,val|
-        if val.is_a? Array
-          format = val.shift
-          val.map! {|v|send v}
-          "#{key}:#{sprintf format, *val}"
-        else
-          "#{key}:#{send val}"
+        begin
+          if val.is_a? Array
+            format = val.shift
+            val.map! {|v|send v}
+            "#{key}:#{sprintf format, *val}"
+          else
+            "#{key}:#{send val}"
+          end
+        rescue
+          next
         end
       end
     "#<#{props.join ' '}>"

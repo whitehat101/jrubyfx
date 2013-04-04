@@ -102,9 +102,10 @@ describe "JRubyFX Inspect" do
       subject.inspect.should match 'content:'
     end
 
-    # it "javafx.scene.text.Text" do
-    #   subject = Java::JavafxSceneText::Text.new
-    # end
+    it "javafx.scene.text.Text" do
+      subject = Java::JavafxSceneText::Text.new 'test'
+      subject.inspect.should match /#<Java::JavafxSceneText::Text:0x[0-9a-f]+ x:.+ y:.+ text:.+ textAlignment:.+ font:.+ underline:.+ lineSpacing:.+ textOrigin:.+ boundsType:.+ wrappingWidth:.+ strikethrough:.+ fontSmoothingType:.+>/
+    end
 
   end
 
