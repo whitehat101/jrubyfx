@@ -31,16 +31,19 @@ module JRubyFX::Utils::Inspector
   def inspect
     props = ["#{self.class}:#{'0x%08x' % object_id}"]
     props += (self.class.instance_variable_get('@inspect_properties')||discover_properties).
+      tap {|h|puts "inspecting: #{h}"}.
       map do |key,val|
         begin
           if val.is_a? Array
-            format = val.shift
-            val.map! {|v|send v}
-            "#{key}:#{sprintf format, *val}"
+            values = val.dup
+            format = values.shift
+            values.map! {|v|send v}
+            "#{key}:#{sprintf format, *values}"
           else
             "#{key}:#{send val}"
           end
-        rescue
+        rescue => e
+          puts "inspect! #{e}"
           next
         end
       end
