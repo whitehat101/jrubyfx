@@ -104,7 +104,19 @@ describe "JRubyFX Inspect" do
 
     it "javafx.scene.text.Text" do
       subject = Java::JavafxSceneText::Text.new 'test'
-      subject.inspect.should match /#<Java::JavafxSceneText::Text:0x[0-9a-f]+ x:.+ y:.+ text:.+ textAlignment:.+ font:.+ underline:.+ lineSpacing:.+ textOrigin:.+ boundsType:.+ wrappingWidth:.+ strikethrough:.+ fontSmoothingType:.+>/
+      subject.inspect.should match /#<Java::JavafxSceneText::Text:0x[0-9a-f]+/
+      subject.inspect.should match 'text:'
+      subject.inspect.should match 'textAlignment:LEFT'
+      subject.inspect.should match 'font:'
+      subject.inspect.should match 'underline:false'
+      subject.inspect.should match 'lineSpacing:0.0'
+      subject.inspect.should match 'x:0.0'
+      subject.inspect.should match 'y:0.0'
+      subject.inspect.should match 'textOrigin:BASELINE'
+      subject.inspect.should match 'boundsType:LOGICAL'
+      subject.inspect.should match 'wrappingWidth:0.0'
+      subject.inspect.should match 'strikethrough:false'
+      subject.inspect.should match 'fontSmoothingType:GRAY'
     end
 
   end

@@ -4,17 +4,17 @@ require 'jrubyfx/utils/inspector'
 Java::JavafxScene::Node.send :include, JRubyFX::Utils::Inspector
 
 
-Java::JavafxSceneText::Text.inspect_properties(
-  x: :x,
-  y: :y,
-  text: :text,
-  textAlignment: :textAlignment,
-  font: :font,
-  underline: :underline,
-  lineSpacing: :lineSpacing,
-  textOrigin: :textOrigin,
-  boundsType: :boundsType,
-  wrappingWidth: :wrappingWidth,
-  strikethrough: :strikethrough,
-  fontSmoothingType: :fontSmoothingType
-)
+# Java::JavafxSceneText::Text.inspect_properties(
+#   x: :x,
+#   y: :y,
+#   text: :text,
+#   textAlignment: :textAlignment,
+#   font: :font,
+#   underline: :underline,
+#   lineSpacing: :lineSpacing,
+#   textOrigin: :textOrigin,
+#   boundsType: :boundsType,
+#   wrappingWidth: :wrappingWidth,
+#   strikethrough: :strikethrough,
+#   fontSmoothingType: :fontSmoothingType
+# )

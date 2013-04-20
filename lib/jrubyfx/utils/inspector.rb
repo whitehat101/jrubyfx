@@ -35,7 +35,7 @@ module JRubyFX::Utils::Inspector
         if val.is_a? Array
           values = val.dup
           format = values.shift
-          values.map! {|v|send v rescue "!!!"}
+          # values.map! {|v|send v rescue "!!!"}
           "#{key}:#{sprintf format, *values}"
         else
           "#{key}:#{send val}"
@@ -49,8 +49,10 @@ private
   # Use reflection to discover properties
   def discover_properties
     props = {}
+    # puts java_class
     (java_class.java_instance_methods - java_class.superclass.java_instance_methods).
-      select {|m|m.return_type and m.return_type.interfaces.include? Java::JavafxBeansProperty::Property.java_class}.
+      select {|m|m.return_type and m.return_type.interfaces.include? Java::JavafxBeansProperty::Property.java_class and not m.name =~ /impl_/}.
+      # tap    {|m| m.each {|m|puts " - #{m.public?} #{m.name} #{m.to_string} #{}"} }.
       map    {|m|send(m.name).getName}.
       each   {|p|props.merge! p => p}
     self.class.instance_variable_set '@inspect_properties', props
